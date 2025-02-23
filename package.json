@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "astronomia": "^4.1.1",
+    "three": "^0.173.0"
+  }
+}
