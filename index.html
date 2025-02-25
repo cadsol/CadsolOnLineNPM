@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>CadsolOnLine 3D</title>
+	<title>CadsolOnLine 3D NPM</title>
 	<link rel="icon" type="image/x-icon" href="./favicon.ico">
 	
 	<meta name="viewport" content="width=device-width,   initial-scale=1.0">
@@ -12,13 +12,11 @@
 	<!--  FICHIER CSS----------------------------------------user-scalable=no,minimum-scale=1.0, maximum-scale=1.0,------------------------------------------------------------------ -->
 	<link type="text/css" rel="stylesheet" href="./main030624.css">
 	<!--  FICHIER CSS----------------------------------------------------------------------------------------------------------- -->
-
 	<style id="styleoverrides" media="screen"></style>
-
 </head>
 
 
-<body>
+<body>npm
 	<div id="container">
 		<div id="info">
 			<h1>CadSolOnLine</h1>
@@ -57,7 +55,7 @@
 	<script type="importmap">
 		{
 			"imports": {
-				"three": "./node_modules/three/build/three.module.js",
+				"three": "./node_modules/three/build/three.module.min.js",
 				"three/addons/": "./node_modules/three/examples/jsm/",
 				"astronomia/": "./node_modules/astronomia/src/"
 			}
@@ -81,7 +79,8 @@
 		import * as THREE from 'three';
 
 		import Stats from 'three/addons/libs/stats.module.js';
-		import { GUI } from 'three/addons/libs/lil-gui.module.min.js';     //version 0.17.0
+		//import { GUI } from 'three/addons/libs/lil-gui.module.min.js';     //version 0.17.0
+		import { GUI } from './node_modules/lil-gui/dist/lil-gui.esm.min.js'
 		import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 		import { FontLoader } from 'three/addons/loaders/FontLoader.js';
@@ -3238,7 +3237,7 @@
 			//// ORIENTATION	
 
 			const folderOrientationSundial = folderSundial.addFolder("Orientation...");
-			folderOrientationSundial.add(cs, "decli", -180, 180, 0.1)
+			const ctlDecli = folderOrientationSundial.add(cs, "decli", -180, 180, 0.1)
 				.name("Declinaison °")
 				.onChange(() => { eulerCsGroup()/*;TracerHeuresEtArcs;TracerStyle()*/ })
 				.onFinishChange(() => {
