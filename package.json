@@ -1,13 +1,11 @@
 {
   "dependencies": {
     "astronomia": "^4.1.1",
-    "three": "^0.173.0"
-  },
-  "devDependencies": {
+    "three": "^0.173.0",
     "lil-gui": "^0.20.0"
   },
   "name": "cadsolonline",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Logiciel de gnomonique en ligne",
   "main": "index.html",
   "scripts": {
@@ -20,10 +18,12 @@
   "keywords": [
     "cadran",
     "solaire",
-    "gnomonique"
+    "gnomonique",
+    "sundial",
+    "solar"
   ],
   "author": "Astre JL, Massé Y",
-  "license": "MIT",
+  "license": "CECILL-2.1",
   "bugs": {
     "url": "https://github.com/cadsol/CadsolOnLineNPM/issues"
   },

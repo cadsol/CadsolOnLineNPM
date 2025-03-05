@@ -1,0 +1,94 @@
+2022/09  Mse en ligne
+
+Mise à jour du 2022/09/13  :  Choix de la précision des tracés (donc du nombre de pointsdans les fichiers CSV et SVG)
+
+ Mise à jour du 2022/10/04  :   Subdivision des heures, codage par modules
+
+ Mise à jour du 2022/10/23  :    Cadrans analemmatiques
+
+ Mise à jour du 2022/11/07  :    Cadrans d'exemple
+
+ Mise à jour du 2022/11/30  :    Interface, exports CSV et HTML
+
+ Mise à jour du 2023/03/15  :    Cadrans calculés par Ray-tracing
+
+ Mise à jour du 2023/04/16:      Cadrans définis par une surface paramérée du type z=f(x,y)
+
+ Mise à jour du 2023/04/25:      Menus auto, style triangulaire ou trapezoïdal
+
+ Mise à jour du 2023/08/13:      Correction bug cadrans polaires
+
+Mise à jour du 2023/09/08:      Heures planétaires
+
+Mise à jour du 2024/02/05:      Cadrans polyédriques - Cadrans analemmatiques à projection centrale
+
+
+070224 -> publié
+menu "Sundial time"
+gestion des portions de tracés en dehors du cadran
+gestion des années bissextiles
+creation fichiers images
+
+160224 -> publié
+Exemple: Tour des Vents
+Arcs zodiacaux 
+Cercles polaires
+Correction bug style polaire: 
+    toujours appeller TracerHeuresEtArcs AVANT TracerStyle 
+    (pour le calcul de cs.xPole et cs.yPole)
+
+210224
+memorisation de;
+- la position de la camera
+- la vitesse de rotation du soleil
+voie lactée en fond d'écran (sur option)
+- correction bug sortie CSV polyedres
+
+270224 -> publié
+-cercles: equatorial et ecliptique
+-point vernal
+-maquette YM
+
+080324 -> publié
+-modif tracé de l'écliptique pour tenir compte de la longitude. 
+-correction de la Disparition du sous-menu "Shadow by..." 
+    folderGnomon.show() ajouté dans InitMenu()
+-condition if (cs.typeCadran != ANL) de la fonction PlacerLeSoleil() supprimée
+-lien vers un editeur svg:  https://svgedit.netlify.app/editor/index.html
+-modif Download menu
+
+140324
+- dates des analemmatiques : corrections pour les mois de 30, 29 ou 28 jpours
+- modif bifilaire generalisé
+220324
+- sphere armilaire
+020424
+- tracé et mise à plat de la seule face active (pour impression 3D)
+180624
+- correction d'un bug dans la vitesse apparente du soleil
+030624-> publié
+
+170624
+- surfaces paramétrées du type x(u,v) y(u,v) z(u,v) > Exemples (Mobius, Astroidal Ellipsoid,Tore de Klein)
+- correction bugs mineurs (chargement des textures, textes des heures par tracés de rayon)
+290624->publié
+
+270924
+- cadrans polyedriques dimensionnables, sortie 2D améliorée
+- cadrans à style profilés
+- correction bugs mineurs (éclairage des cadrans...)
+071024
+- support de style profilé
+151124-> publié
+- choix du fond de cadran (jpg, png)
+181224
+-correction bug numérotation des heures dans les sorties csv 
+-bouton paramètres
+141224
+-sources de l'éditeur svg
+250126 
+-maj des ephemerides
+-maj du menu download
+250203
+-maj ephemerides (VSOP87)
+

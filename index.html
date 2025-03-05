@@ -3075,17 +3075,6 @@
 
 
 
-			// const nameW = "List params"
-			// const ButtonFiche = {
-			// 	functionFiche() {
-			// 		let w; // window
-			// 		//w = window.open("",nameW, "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=400,height=400")
-			// 		w = window.open()
-			// 		w.name = nameW + ":" + cs.nameFiles
-			// 		w.document.write(HTLM(cs))
-			// 		w.document.close()
-			// 	}
-			// }
 
 			//// SURFACE PARAMETREE
 			var gParam, gParam_xText, gParam_yText, gParam_zText,
@@ -4204,8 +4193,11 @@
 				}
 			}
 
-			
-			const btnEditSVG = { EditSVG() { window.open("./editor/index.html") } }
+
+			const linkEditor = "https://svgedit.netlify.app/editor/index.html"
+			//const linkEditor = "./editor/index.html"
+
+			const btnEditSVG = { EditSVG() { window.open(linkEditor) } }
 			gui.add(btnEditSVG, "EditSVG").name("Editor svg")
 
 			CadPolairesEx.close()
