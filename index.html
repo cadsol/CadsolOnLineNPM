@@ -35,7 +35,7 @@
 				<img src="./images/imageMoret.jpg" alt="Image" style="max-width:100%;height:auto">
 			</p>
 			<label class="open" for="jsoninput"> > Open the Sundial (json format)...</label>
-			</br></br>
+			</br></br></br>
 			<div id="menu"> </div>
 
 			<input type="file" id="jsoninput" accept=".json">
@@ -125,7 +125,7 @@
 			HPSA = "Planetary (summer, autumn)", HPWS = "Planetary (winter, spring)";
 
 
-		cs.version = "2025-02-12"
+		cs.version = "2025-03-06"
 		console.log('THREE.REVISION :  ', THREE.REVISION)
 		// const cso = JSON.parse(JSON.stringify(cs))
 		// console.log(cso)
@@ -3973,8 +3973,8 @@
 
 
 			///// EXPORT
-			const gfolderDownLoad = gui.addFolder(sp + 'Save sundial, ephemeris, 3D file...');
-			//helpGui(gfolderDownLoad, "Export the data of the sundial, or: \n the SVG file, the csv file, the 3D model, the ephemeris, the HTML file...")
+			const gfolderDownLoad = gui.addFolder(sp + 'Download sundial, ephemeris, 3D file...');
+			helpGui(gfolderDownLoad, "Export the sundial (json format), or: \n the SVG file, the csv file, the 3D model, the ephemeris, the HTML file...")
 			const ButtonDownload = {
 				functionDownload() {
 					effacelisteMesh(labelAxesListeMesh, groupAxes)
@@ -4009,7 +4009,7 @@
 
 			//			
 
-			const gButtonDownload = gfolderDownLoad.add(ButtonDownload, 'functionDownload').name('Save');
+			const gButtonDownload = gfolderDownLoad.add(ButtonDownload, 'functionDownload').name('Download');
 			helpGui(gButtonDownload, "Save the sundial in the chosen format <br>(JSON, SVG, CSV, PLY, OBJ, STL, GLTF, HTML, Ephemeris)")
 			const gnameFile = gfolderDownLoad.add(cs, "nameFile").name("File name")
 			helpGui(gnameFile, "Name of the file to save")

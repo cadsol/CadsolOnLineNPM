@@ -16,11 +16,14 @@ Mise à jour du 2022/09/13  :  Choix de la précision des tracés (donc du nombr
 
  Mise à jour du 2023/04/25:      Menus auto, style triangulaire ou trapezoïdal
 
- Mise à jour du 2023/08/13:      Correction bug cadrans polaires
+130823
+Correction bug cadrans polaires
 
-Mise à jour du 2023/09/08:      Heures planétaires
+080923
+Heures planétaires
 
-Mise à jour du 2024/02/05:      Cadrans polyédriques - Cadrans analemmatiques à projection centrale
+050224
+Cadrans polyédriques - Cadrans analemmatiques à projection centrale
 
 
 070224 -> publié

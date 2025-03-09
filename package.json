@@ -5,7 +5,7 @@
     "lil-gui": "^0.20.0"
   },
   "name": "cadsolonline",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Logiciel de gnomonique en ligne",
   "main": "index.html",
   "scripts": {
