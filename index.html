@@ -64,12 +64,9 @@
 
 	<script  src="./parser.js"></script>
 
-	<!-- Lacking browser support -->
-	<!-- <script type="module" src="./editor/browser-not-supported.js"></script> -->
 
 	<script type="module">
 		//import  {Parser}  from './parser.js';
-		//import './parser.js';
 		import * as EQTIME from 'astronomia/eqtime.js';
 		import * as JULIAN from 'astronomia/julian.js';
 		import * as base from 'astronomia/base.js';
@@ -79,7 +76,6 @@
 		import * as THREE from 'three';
 
 		import Stats from 'three/addons/libs/stats.module.js';
-		//import { GUI } from 'three/addons/libs/lil-gui.module.min.js';     //version 0.17.0
 		import { GUI } from './node_modules/lil-gui/dist/lil-gui.esm.min.js'
 		import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -104,13 +100,8 @@
 		import { SP, BF, BFG, ANL, RTS, STP, cs, TableSol, Dst, oe, RechercheParAdresse, getLocation, HTLM, Ephemerid } from './Modcolvars.js';
 		import { eclair, Rot, EtoC, ddrte, segm } from './ModAnalem.js'
 		import { POLYHEDRA } from './ModPolyhedra.js';
-		//import Editor from './editor/Editor.js'
-		//import { svgText } from './editor/svgtext.js'
-		//import {tracerEcliptique,effacerEcliptique,tracerSphereArmilaire,effacerSphereArmilaire} from './ModSphereArmilaire.js'
-		// ---------------------------------------------------------------------------------------------------------------------------------	
 
-		// const STP = "Profiled style";
-		//const cs = {a: 5, Rmax: 20, sais: true, appx: false, reb: false};
+		// -----------------------------------Modules---------------------------------------------------------------------------------------
 
 		document.addEventListener("readystatechange", function (evt) { console.log(document.readyState) })
 
@@ -125,8 +116,9 @@
 			HPSA = "Planetary (summer, autumn)", HPWS = "Planetary (winter, spring)";
 
 
-		cs.version = "2025-03-06"
+		cs.version = "2025-03-14"
 		console.log('THREE.REVISION :  ', THREE.REVISION)
+
 		// const cso = JSON.parse(JSON.stringify(cs))
 		// console.log(cso)
 		// for (let k in cso) { cs[k] = structuredClone(cso[k]) }
@@ -140,7 +132,6 @@
 		cs.dayofYear = JULIAN.DayOfYear(cs.year, dateJour.getMonth() + 1, dateJour.getDate(), JULIAN.LeapYearJulian(cs.year))
 		if (JULIAN.LeapYearJulian(cs.year)) { nbJoursAnnee = 366; nbjoursText = "Day (1-366))" } else { nbJoursAnnee = 365, nbjoursText = "Day (1-365))" }
 
-		//const oe=23.4392911  // obliquite de l'Ecliptique, equinoxe de reference 2000.0
 
 		let CSVtext = "", SVGtext = ""  // , CSVephemerid = ""
 
@@ -995,7 +986,7 @@
 
 		//------------------------------------------------------------------------------------------------------------
 		function TracerHeuresEtArcs() {
-			document.body.style.cursor = 'wait'
+			document.body.style.cursor = 'progress'
 			initCSVtext()
 			TracerStyle()
 			switch (cs.typeCadran) {
@@ -1024,7 +1015,7 @@
 			PlacerLeSoleil()
 
 			if (RTSpolyhedre()) { memoriserFace(nfaceActive) }
-			document.body.style.cursor = 'auto'
+			document.body.style.cursor = 'default'
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
