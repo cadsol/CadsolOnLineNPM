@@ -116,7 +116,7 @@
 			HPSA = "Planetary (summer, autumn)", HPWS = "Planetary (winter, spring)";
 
 
-		cs.version = "2025-03-14"
+		cs.version = "2025-03-21"
 		console.log('THREE.REVISION :  ', THREE.REVISION)
 
 		// const cso = JSON.parse(JSON.stringify(cs))
@@ -807,6 +807,9 @@
 				for (let i = 0; i < ns - 1; i++) {
 					ligneSVG(sommets[i].x, -sommets[i].z, sommets[i + 1].x, -sommets[i + 1].z)
 				}
+			
+				EcrireDevise(cs.polyDev[nfaceActive], cs.polyDevx[nfaceActive], cs.polyDevy[nfaceActive], nfaceActive)
+		
 				croixSVG(0, 0)
 				TracerHeuresEtArcs()
 				cs.largeur = l; cs.hauteur = h
@@ -816,56 +819,11 @@
 			closeSVGtext();
 		}
 
-// function construireFichierSVG() {
-
-// if (RTSpolyhedre()) { VoirPoly2D = true }
-// else {
-// 	initSVGtext(cs.unitSVG);
-// 	EcrireDevise(cs.devise, cs.positionDevisex, cs.positionDevisey);
-// 	VoirPoly2D = false
-// 	TracerHeuresEtArcs()
-// }
-
-// if (VoirPoly2D) {
-// 	const sommets = SommetsFace(nfaceActive, polyhedre)
-// 	displayFaces(polyhedre)
-// 	let l = cs.largeur; let h = cs.hauteur; let k = Math.max(cs.largeur, cs.hauteur, cs.epaisseur)
-// 	cs.largeur = 2.5 * k
-// 	cs.hauteur = 2.5 * k
-// 	initSVGtext(cs.unitSVG);
-// 	const ns = sommets.length
-// 	for (let i = 0; i < ns - 1; i++) {
-// 		ligneSVG(sommets[i].x, -sommets[i].z, sommets[i + 1].x, -sommets[i + 1].z)
-// 	}
-// 	croixSVG(0, 0)
-// 	TracerHeuresEtArcs()
-// 	cs.largeur = l; cs.hauteur = h
-// }
-// else { croixSVG(cs.xgnomon, cs.ygnomon) }
-// SVGtext += SVGtextDevise
-// closeSVGtext();
-// }
-
-
-
-
-
 
 		//----------------------------------------------------------------------------
 		function loadFontDevise() {
 			const loader = new FontLoader();
-			// loader.load('./fonts/helvetiker_regular.typeface.json', function (response) {
-			// 	fontDevise = response
-			// });helvetiker_regular.typeface.json
-
-			// loader.load('./fonts/droid/droid_sans_bold.typeface.json', function (response) {
-			// 	fontText = response
-			// });
-			// loader.load('./fonts/helvetiker_regular.typeface.json', function (response) {
-			// 	fontDevise = response
-			// });
-			//node_modules\three\examples\fonts\optimer_bold.typeface.json
-			//node_modules\three\examples\fonts\optimer_regular.typeface.json
+		
 			loader.load('./node_modules/three/examples/fonts/optimer_regular.typeface.json',
 				function (response) { fontText = response },
 				function (xhr) {/*console.log( (xhr.loaded / xhr.total * 100) + '% loaded' )*/ },
@@ -2031,6 +1989,7 @@
 			}
 			//TracerStyle(sunDial)
 			cadranSolaireGroup.add(arcsDiurnesGroup);
+			
 
 		}
 
@@ -3575,6 +3534,7 @@
 						case 'JPG-PNG': lireFichierTexture(); break
 						//case 'SVG':LireFichierSVG();break
 						default: textureCS = t
+						    cs.	dataURLtexture=""  
 							materialCS.map = textureCS
 							materialCS.emissiveMap = textureCS
 							materialCS.needsUpdate = true
@@ -3798,7 +3758,7 @@
 				TracerArcsDiurnes()
 			}
 
-			folderArcs.add(cs, 'equinoxeAndSolstices')
+			gequinoxeAndSolstices = folderArcs.add(cs, 'equinoxeAndSolstices')
 				.name('Equinoxe and solstices')
 				.onChange(function (v) {
 					cs.equinoxeAndSolstices = v;
@@ -3812,14 +3772,18 @@
 							return ((d[0] !== 'solstice') && (d[0] !== 'equinoxe'))
 						})
 					}
+					if (RTSpolyhedre()) { cs.polyequinoxeAndSolstices[nfaceActive] = v
+										  cs.polydatesArcsDiurnes[nfaceActive] = cs.datesArcsDiurnes
+					 					}
 					TracerArcsDiurnes()
 				})
 				.listen();
 
 			const zodiac1 = 20.1, zodiac2 = 11.5   // données astrologiques, précision illusoire
-			folderArcs.add(cs, 'arcsZodiaque')
+			garcsZodiaque = folderArcs.add(cs, 'arcsZodiaque')
 				.name('zodiacal arcs')
 				.onChange(function (v) {
+					cs.arcZodiaque = v
 					if (v) {
 						cs.datesArcsDiurnes.unshift(['Z', base.toRad(-zodiac1)])
 						cs.datesArcsDiurnes.unshift(['Z', base.toRad(zodiac1)])
@@ -3830,6 +3794,9 @@
 						cs.datesArcsDiurnes = cs.datesArcsDiurnes.filter(function (d) {
 							return (d[0] !== 'Z')
 						})
+					}
+					if (RTSpolyhedre()) { cs.polyarcsZodiaque[nfaceActive] = v 
+										  cs.polydatesArcsDiurnes[nfaceActive] = cs.datesArcsDiurnes
 					}
 					TracerArcsDiurnes()
 				})
@@ -3877,7 +3844,7 @@
 				.onFinishChange(function () {
 					EcrireDevise(cs.devise, cs.positionDevisex, cs.positionDevisey)
 				})
-				.listen
+				.listen()
 			folderDevise.add(cs, "positionDevisey", -500, 500, 0.1)
 				.name("↑ ↓")
 				.onChange(function () {
@@ -4744,6 +4711,8 @@
 		let meshFaces = [], meshGnomons = [], normalsFaces = [], hauteursGnomons = [], centersFaces = [], rayonFace = []
 		let nfaceActive = 0, aFace = 0, nFaceMax = -1, nFaceBase = -1
 		let numFace = "", Lmax
+		let lineSommetsFace
+		let garcsZodiaque, gequinoxeAndSolstices;
 
 		let
 			polyheuresSolairesListeMesh = [],
@@ -5070,16 +5039,8 @@
 		function effacerTouteslesfaces() {
 			TouteslesHeuresFalse()
 			effacerListesMesh()
-
-			for (let f = 0; f < nbFaces; f++) {
-				effacerPolyListes(f)
-				// nfaceActive = f
-				//cadran = meshFaces[f].clone()
-				// //displayFaces(polyhedre)
-				// cs.datesArcsDiurnes = [[]]
-				// cs.equinoxeAndSolstices = false
-				//TracerHeuresEtArcs()
-			}
+			if (lineSommetsFace != undefined) { scene.remove(lineSommetsFace) }
+			for (let f = 0; f < nbFaces; f++) {effacerPolyListes(f)}
 		}
 
 		function TouteslesHeuresFalse() {
@@ -5092,12 +5053,14 @@
 			cs.heuresSideralesSA = false
 			cs.heuresPlanetairesWS = false
 			cs.heuresPlanetairesSA = false
-			cs.datesArcsDiurnes = []
+			cs.datesArcsDiurnes = [[]]
 			cs.equinoxeAndSolstices = false
+			cs.arcsZodiaque = false
 		}
 
 
 		function tracerTouteslesfaces() {
+			effacerTouteslesfaces()
 			rapellerFace(nfaceActive)
 			for (let f = 0; f < nbFaces; f++) {
 				nfaceActive = f
@@ -5184,11 +5147,20 @@
 			cs.positionDevisex = cs.polyDevx[nfaceActive]
 			cs.positionDevisey = cs.polyDevy[nfaceActive]
 			cs.devise = cs.polyDev[nfaceActive]
-			//for(let i=0;i<nbFaces;i++){if (i!=nfaceActive){meshFaces[i].visible=false}}
+			tracerContourFace(nfaceActive)
+			
 		}
+
+		function tracerContourFace(aFace) {
+					if (lineSommetsFace != undefined) { scene.remove(lineSommetsFace) }
+					const sommets = SommetsFace(aFace, polyhedre, false)
+					const geometry = new THREE.BufferGeometry().setFromPoints(sommets);
+					lineSommetsFace = new THREE.Line(geometry);
+					scene.add(lineSommetsFace);
+			}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function InitGuiPolyedres(gui) {
-			let lineSommetsFace
+			
 
 			let rotationFaces = {
 				face: 1,
@@ -5226,21 +5198,17 @@
 			guichoixFace = guiSectionPoly.add(rotationFaces, "face", 1, nbFaces, 1)
 				.name(" Edit facet n°")
 				.onChange(function (f) {
-
-					if (lineSommetsFace != undefined) { scene.remove(lineSommetsFace) }
 					aFace = f - 1
 					if (aFace >= nbFaces) { aFace = nbFaces - 1 }
 					PlacerStyleToriquePoly(aFace, hauteursGnomons[aFace])
-					const sommets = SommetsFace(aFace, polyhedre, false)
-					const geometry = new THREE.BufferGeometry().setFromPoints(sommets);
-					lineSommetsFace = new THREE.Line(geometry);
-					scene.add(lineSommetsFace);
+					tracerContourFace(aFace)
 				})
 
 				.onFinishChange(function (f) {
 					nfaceActive = f - 1
 					if (nfaceActive >= nbFaces) { nfaceActive = nbFaces - 1 }
-					tracerFaceActive()
+					//cs.polydatesArcsDiurnes=[[]]
+					rapellerFace(nfaceActive)
 					if (cs.uniform) {
 						guixgnomon.max(rayonFace[nfaceActive])
 						guixgnomon.min(-rayonFace[nfaceActive])
@@ -5253,14 +5221,18 @@
 						guixFaceDevise.updateDisplay()
 						guiyFaceDevise.max(rayonFace[nfaceActive])
 						guiyFaceDevise.min(-rayonFace[nfaceActive])
+						guiyFaceDevise.updateDisplay()
 					}
-					guiyFaceDevise.updateDisplay()
-					scene.remove(lineSommetsFace)
-					//console.log(rmaxFace[nfaceActive])
-				})
+					
+					tracerFaceActive()
+					
+					garcsZodiaque.updateDisplay();
+					gequinoxeAndSolstices.updateDisplay();
+					})
 				.listen()
 			guichoixFace.max(nbFaces)
 			guichoixFace.updateDisplay()
+			
 
 
 			//choix de la base et de la face sud

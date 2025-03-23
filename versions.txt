@@ -1,23 +1,22 @@
 2022/09  Mse en ligne
 
-Mise à jour du 2022/09/13  :  Choix de la précision des tracés (donc du nombre de pointsdans les fichiers CSV et SVG)
+2022/09/13  :   Choix de la précision des tracés (donc du nombre de pointsdans les fichiers CSV et SVG)
 
- Mise à jour du 2022/10/04  :   Subdivision des heures, codage par modules
+2022/10/04  :   Subdivision des heures, codage par modules
 
- Mise à jour du 2022/10/23  :    Cadrans analemmatiques
+2022/10/23  :    Cadrans analemmatiques
 
- Mise à jour du 2022/11/07  :    Cadrans d'exemple
+2022/11/07  :    Cadrans d'exemple
 
- Mise à jour du 2022/11/30  :    Interface, exports CSV et HTML
+2022/11/30  :    Interface, exports CSV et HTML
 
- Mise à jour du 2023/03/15  :    Cadrans calculés par Ray-tracing
+2023/03/15  :    Cadrans calculés par Ray-tracing
 
- Mise à jour du 2023/04/16:      Cadrans définis par une surface paramérée du type z=f(x,y)
+2023/04/16  :    Cadrans définis par une surface paramérée du type z=f(x,y)
 
- Mise à jour du 2023/04/25:      Menus auto, style triangulaire ou trapezoïdal
+2023/04/25  :    Menus auto, style triangulaire ou trapezoïdal
 
-130823
-Correction bug cadrans polaires
+2023/08/23  :    Correction bug cadrans polaires
 
 080923
 Heures planétaires
@@ -94,4 +93,8 @@ voie lactée en fond d'écran (sur option)
 -maj du menu download
 250203
 -maj ephemerides (VSOP87)
+250314
+-modules npm
+250325
+-corrections bugs polyedres: curseur vue2D, arcs diurnes
 
