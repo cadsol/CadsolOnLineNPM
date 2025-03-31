@@ -2473,7 +2473,7 @@
 			const guiTimehsol = guiTime.add(cs, "hsol", 0, 24, 0.01)
 				.name("Hour  (0-24)")
 				.onChange(function () { PlacerLeSoleil() }).listen();
-			helpGui(guiTimehsol, 'Decimal hour')
+			helpGui(guiTimehsol, 'Decimal hour (15h30 = 15.5 15h15 = 15.25 ...)')
 
 
 			const guiTimeday = guiTime.add(cs, "dayofYear", 1, nbJoursAnnee, 1)
@@ -2792,7 +2792,6 @@
 				gnomon.visible = false
 				eulerCsGroup()
 				PlacerLeSoleil()
-				//render()
 				EcrireXYZ()
 
 				// gTypeCadran.hide()
@@ -4329,7 +4328,8 @@
 		const pointsPolairesNord = curvePolaire.getPoints(50);
 		const pointsPolairesSud = curvePolaire.getPoints(50);
 		const geometryHorizon = new THREE.RingGeometry(Dst * 1.02, Dst * 0.98, 64, 64)
-		const geometryEq = new THREE.RingGeometry(Dst * 1.002, Dst * 0.998, 64, 64)
+		const geometryEcliptique = new THREE.CylinderGeometry(Dst, Dst,Dst/100, 64, 64,true)
+		const geometryEquateur = new THREE.RingGeometry(Dst * 1.002, Dst * 0.998, 64, 64)
 		const geometryTropiqueNord = new THREE.BufferGeometry().setFromPoints(pointsTropiqueNord);
 		const geometryTropiqueSud = new THREE.BufferGeometry().setFromPoints(pointsTropiqueSud);
 		const geometryPolaireNord = new THREE.BufferGeometry().setFromPoints(pointsPolairesNord);
@@ -4343,7 +4343,7 @@
 
 		function tracerEquateurCeleste() {
 			if (ellipseEq != undefined) { scene.remove(ellipseEq) }
-			ellipseEq = new THREE.Line(geometryEq, materialEq)
+			ellipseEq = new THREE.Line(geometryEquateur, materialEq)
 			scene.add(ellipseEq)
 			ellipseEq.rotation.x = base.toRad(cs.lati);
 			// const AxeArmilaire = axeMonde.clone()
@@ -4384,7 +4384,7 @@
 			horizon.rotation.x = Math.PI / 2;
 			scene.add(horizon)
 			if (meridien != undefined) { scene.remove(meridien) }
-			meridien = new THREE.Line(geometryEq, materialMeridien);
+			meridien = new THREE.Line(geometryEquateur, materialMeridien);
 			meridien.rotation.y = Math.PI / 2;
 			scene.add(meridien)
 		}
@@ -4399,9 +4399,14 @@
 			axeMondeGroup.add(axeArmilaire)
 			axeArmilaire.rotation.x = base.toRad(cs.lati + 90);
 		}
-		materialEclip
+	
 		function tracerEcliptique(h) {
 			tracerEquateurCeleste()
+			// if (ellipseEq != undefined) { scene.remove(ellipseEq) }
+			// ellipseEq = new THREE.Mesh(geometryEcliptique, materialEq)
+			// scene.add(ellipseEq)
+			// ellipseEq.rotation.x = base.toRad(cs.lati);
+
 			let k = Dst, alpha = 0, asd
 			asd = TS.ascRights[cs.dayofYear - 1]
 			h = base.toRad(-(h - 12) * 15) - asd
@@ -4710,7 +4715,7 @@
 		let meshFacesGroup = new THREE.Group()
 		let meshFaces = [], meshGnomons = [], normalsFaces = [], hauteursGnomons = [], centersFaces = [], rayonFace = []
 		let nfaceActive = 0, aFace = 0, nFaceMax = -1, nFaceBase = -1
-		let numFace = "", Lmax
+		let numFace = ""  //, Lmax
 		let lineSommetsFace
 		let garcsZodiaque, gequinoxeAndSolstices;
 
@@ -5526,7 +5531,7 @@
 			cadranSolaireGroup.add(groupAxes)
 
 			Rpol = cs.rayonPolyedre
-			Lmax = 3 * Math.max(cs.largeur, cs.hauteur, cs.epaisseur)
+			//Lmax = 3 * Math.max(cs.largeur, cs.hauteur, cs.epaisseur)
 			cs.xgnomon = 0; cs.ygnomon = 0
 
 			nfaceActive = 0
