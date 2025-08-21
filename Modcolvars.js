@@ -37,6 +37,20 @@ export let cs = {
 	incli: 90,
 	rot: 0,
 
+	//cadrans cylindriques,coniques,tonc-coniques, sphériques
+	openCyl:false, //true si le cadran est ouvert
+	startCyl:180, //angle de départ du cadran en degres
+	endCyl:360, //angle d'ouverture du cadran en degres
+	RsupCyl: 100, // rayon de la face supérieure
+	RinfCyl: 100, // rayon de la face inférieur
+	hCyl: 300, // hauteur du cadran
+	conicityCyl: 0, //conicité du cadran, 0 pour un cylindre, 1 pour un cône, -1 pour un cône inversé
+		alphaCyl : 0, //angle de conicité du cadran en degrés
+		phiCyl : 0, //angle de developpement du cadran en degrés
+		genCyl: 300, //generatice
+		R1: 100, // rayon de l'arc supérieur du developpé
+		R2: 100, // rayon de l'arc inférieur du developpé
+
 	//cadran à style profilé
 	a: 5, Rmax: 20, sais: true, appx: false, reb: false,support:false,//saisSA:true,saisWS:false,
 
