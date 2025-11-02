@@ -3042,23 +3042,27 @@
 					let w; // window
 					cs.unitSVG = "auto"
 					construireFichierSVG()
-					w = window.open()
-					w.name = cs.nameFile
-					w.document.write(`					
-					<!DOCTYPE html>
-					<html lang="en">
-  			    	<head>					
-					<meta charset="utf-8" />
-	                <title>CadsolOnLine 2D ${cs.nameFile}</title>
-					</head>
-					<body>
-					`)
-					w.document.write(SVGtext)
-					w.document.write(`
-					</body>
-					</html>
+					try {				
+						w = window.open()
+						w.name = cs.nameFile
+						w.document.write(`					
+						<!DOCTYPE html>
+						<html lang="en">
+						<head>					
+						<meta charset="utf-8" />
+						<title>CadsolOnLine 2D ${cs.nameFile}</title>
+						</head>
+						<body>
+						`)
+						w.document.write(SVGtext)
+						w.document.write(`
+						</body>
+						</html>
 	                `)
 					w.document.close()
+					} catch (error) {
+						console.log(error)
+					}
 					if (cs.typeForme == "polyedric") { VoirPoly2D = false; TracerHeuresEtArcs() }
 					//console.log(SVGtext)
 				}
